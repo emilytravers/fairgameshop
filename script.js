@@ -9,12 +9,14 @@ let priceD = 0;
 let priceVIP = 0;
 let moneyD = prompt("How many Dolluhs do you have?");
 let moneyVIP = prompt("How many VIP Points do you have?");
+leftD = moneyD;
+leftVIP = moneyVIP;
 
 window.onload = function(){
 document.querySelector('.currentD').innerHTML = `Your current Dolluhs: ${moneyD}`
 document.querySelector('.currentVIP').innerHTML = `Your current VIP Points: ${moneyVIP}`
-document.querySelector('.leftD').innerHTML = `You currently have ${moneyD} Dolluhs left.`
-document.querySelector('.leftVIP').innerHTML = `You currently have ${moneyVIP} VIP Points left.`
+document.querySelector('.leftD').innerHTML = `Dolluhs left: ${moneyD}`
+document.querySelector('.leftVIP').innerHTML = `VIP Points left: ${moneyVIP}`
 }
 
 //toggle item class .active
@@ -52,11 +54,15 @@ function findPrice(element){
 function updateSpent(currency, multiplier, price){
     if (currency == "priceD"){
         priceD = priceD + (multiplier * price)
+        leftD = moneyD - priceD;
         document.querySelector('.spentD').innerText = `Current Dolluhs spent: ${priceD}`
+        document.querySelector('.leftD').innerText = `Dolluhs left: ${leftD}`
     }
     else{
         priceVIP = priceVIP + (multiplier * price)
+        leftVIP = moneyVIP - priceVIP;
         document.querySelector('.spentVIP').innerText = `Current VIP Points spent: ${priceVIP}`
+        document.querySelector('.leftVIP').innerText = `VIP Points left: ${leftVIP}`
     }
 }
 
