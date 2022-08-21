@@ -4,8 +4,18 @@
 //turn the list item into an array, find "price:", select after that (whatever is between price and end value)
 //when total is >= disable all other items && maybe make running total bg red? or have notif up?
 
-//establish your running cost as 0 before selecting any items to buy
-let price = 0;
+//establish your moneys and cart total as 0
+let priceD = 0;
+let priceVIP = 0;
+//let moneyD = prompt("How many Dolluhs do you have?");
+//let moneyVIP = prompt("How many VIP Points do you have?");
+
+window.onload = function(){
+document.querySelector('.currentD').innerHTML = `Your current Dolluhs: ${moneyD}`
+document.querySelector('.currentVIP').innerHTML = `Your current VIP Points: ${moneyVIP}`
+document.querySelector('.leftD').innerHTML = `You currently have ${moneyD} Dolluhs left.`
+document.querySelector('.leftVIP').innerHTML = `You currently have ${moneyVIP} VIP Points left.`
+}
 
 //toggle item class .active
 function toggleActive(element){
@@ -17,11 +27,11 @@ function updatePrice(){
     
 }
 
-//look at the string after price: , convert it into an integer, return this number as the price of the item
+//needs to return the price at the end of the string
 function findPrice(element){
-    const value = Array.from(element);
-    const firstIndex = value.indexOf(':') + 1;
-    return parseInt(value.slice(firstIndex))
+    const endpoint = element.innerText.search(':');
+    //console.log(endpoint);
+    return element.innerText.slice(endpoint)
 }
 
 //create an array of all list items based on class of list-group-item
@@ -31,6 +41,6 @@ const items = document.querySelectorAll('.list-group-item');
 items.forEach(element => {
     element.addEventListener('click', function handleClick(){
        toggleActive(element);
-       const changePrice = findPrice(element);
+       findPrice(element);
     });
 });
